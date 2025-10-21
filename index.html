@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mendaftar - Portal Layanan Publik Terpadu</title>
+    <style>
+        /* Reset dan variabel */
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #2563eb;
+            --accent-color: #f59e0b;
+            --light-color: #f8fafc;
+            --dark-color: #1e293b;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: var(--light-color);
+        }
+        
+        /* Header */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo img {
+            height: 50px;
+        }
+        
+        .logo h1 {
+            font-size: 1.5rem;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: var(--accent-color);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(30, 58, 138, 0.8), rgba(30, 58, 138, 0.9)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%231e3a8a"/><path d="M0 0L100 100M100 0L0 100" stroke="%232563eb" stroke-width="1"/></svg>');
+            background-size: cover;
+            color: white;
+            padding: 3rem 1rem;
+            text-align: center;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--dark-color);
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .cta-button:hover {
+            background-color: #e69008;
+        }
+        
+        /* Main Content */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        
+        .intro {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .intro h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .intro p {
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+        
+        .feature-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .feature-card h3::before {
+            content: "✓";
+            background-color: var(--success-color);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+        
+        .services {
+            background-color: #e2e8f0;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 3rem;
+        }
+        
+        .services h2 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .service-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .service-item h3 {
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 2rem 1rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-section h3 {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-section a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-section a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #475569;
+            color: #94a3b8;
+        }
+        
+        /* Responsif */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+                text-align: center;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+            
+            .service-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 50 50'><rect width='50' height='50' fill='white'/><path d='M25 10L35 20L25 30L15 20Z' fill='%231e3a8a'/><circle cx='25' cy='25' r='5' fill='%23f59e0b'/></svg>" alt="Logo Mendaftar">
+                <h1>Mendaftar</h1>
+            </div>
+            <button class="mobile-menu-btn">☰</button>
+            <nav>
+                <ul>
+                    <li><a href="#">Beranda</a></li>
+                    <li><a href="#">Layanan</a></li>
+                    <li><a href="#">Informasi</a></li>
+                    <li><a href="#">Regulasi</a></li>
+                    <li><a href="#">Kontak</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Portal Layanan Publik Terpadu</h2>
+            <p>Memberikan kemudahan akses informasi dan layanan publik bagi seluruh masyarakat</p>
+            <a href="#" class="cta-button">Mulai Mendaftar</a>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main>
+        <section class="intro">
+            <h2>Selamat Datang di Portal Mendaftar</h2>
+            <p>Portal Mendaftar merupakan inisiatif pemerintah untuk menyediakan akses informasi dan layanan publik yang terintegrasi, transparan, dan mudah diakses oleh seluruh masyarakat. Dengan platform ini, kami berkomitmen untuk meningkatkan kualitas pelayanan publik melalui digitalisasi proses administrasi.</p>
+            <p>Kami memahami bahwa kebutuhan informasi dan layanan publik yang cepat dan akurat sangat penting bagi masyarakat. Oleh karena itu, kami terus mengembangkan dan memperbarui konten serta fitur-fitur yang tersedia di portal ini untuk memastikan pengalaman pengguna yang optimal.</p>
+        </section>
+
+        <section class="features">
+            <div class="feature-card">
+                <h3>Akses Mudah</h3>
+                <p>Portal Mendaftar dapat diakses kapan saja dan di mana saja melalui berbagai perangkat, termasuk smartphone, tablet, dan komputer. Desain responsif memastikan pengalaman browsing yang optimal di semua ukuran layar.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Informasi Terkini</h3>
+                <p>Kami menyediakan informasi terbaru seputar kebijakan pemerintah, program bantuan, lowongan kerja, dan berbagai informasi penting lainnya yang dibutuhkan masyarakat.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Layanan Terpadu</h3>
+                <p>Dengan satu akun, Anda dapat mengakses berbagai layanan publik seperti pembuatan dokumen kependudukan, pendaftaran usaha, pelaporan pajak, dan banyak layanan lainnya.</p>
+            </div>
+        </section>
+
+        <section class="services">
+            <h2>Layanan Unggulan</h2>
+            <div class="service-grid">
+                <div class="service-item">
+                    <h3>Pendaftaran Penduduk</h3>
+                    <p>Layanan untuk mengurus dokumen kependudukan seperti KTP, Kartu Keluarga, dan Akta Kelahiran.</p>
+                </div>
+                <div class="service-item">
+                    <h3>Perizinan Usaha</h3>
+                    <p>Proses perizinan usaha yang lebih cepat dan transparan dengan sistem online terintegrasi.</p>
+                </div>
+                <div class="service-item">
+                    <h3>Informasi Publik</h3>
+                    <p>Akses terhadap berbagai informasi publik seperti anggaran, regulasi, dan program pemerintah.</p>
+                </div>
+                <div class="service-item">
+                    <h3>Pengaduan Masyarakat</h3>
+                    <p>Sarana untuk menyampaikan keluhan, saran, atau pengaduan terkait pelayanan publik.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Tentang Kami</h3>
+                <p>Portal Mendaftar adalah platform layanan publik terintegrasi yang dikembangkan untuk mempermudah akses masyarakat terhadap informasi dan layanan pemerintah.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Link Cepat</h3>
+                <ul>
+                    <li><a href="#">Kebijakan Privasi</a></li>
+                    <li><a href="#">Syarat dan Ketentuan</a></li>
+                    <li><a href="#">Peta Situs</a></li>
+                    <li><a href="#">Bantuan</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Kontak</h3>
+                <ul>
+                    <li>Email: info@mendaftar.verifikasi.id</li>
+                    <li>Telepon: 1500-123</li>
+                    <li>Alamat: Gedung A, Jl. Merdeka No. 1, Jakarta</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 Portal Mendaftar - Hak Cipta Dilindungi Undang-Undang</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            const nav = document.querySelector('nav');
+            nav.style.display = nav.style.display === 'block' ? 'none' : 'block';
+        });
+        
+        // Adjust nav display on window resize
+        window.addEventListener('resize', function() {
+            const nav = document.querySelector('nav');
+            if (window.innerWidth > 768) {
+                nav.style.display = 'block';
+            } else {
+                nav.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
